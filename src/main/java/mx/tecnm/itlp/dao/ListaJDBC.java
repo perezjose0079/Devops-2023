@@ -28,5 +28,11 @@ public class ListaJDBC  {
 					+ "(?,?,?)";
 					conexion.update(sql,lista.getFecha(),lista.getPerfiles_usuarios_id(),lista.getPeliculas_id());
 		}
-	}
+		
+		public void desactivaList (int listaid) {
+			String sql = "UPDATE mi_lista SET activo = 0 WHERE id = ?";
+			conexion.update(sql, listaid);
+		}
+		}
+	
 

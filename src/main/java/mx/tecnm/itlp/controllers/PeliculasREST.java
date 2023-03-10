@@ -39,4 +39,9 @@ public class PeliculasREST {
         	return new ResponseEntity<>(HttpStatus.CONFLICT);    	
     	}
     }
+	@DeleteMapping("{pelicula-id}")
+	public ResponseEntity<?> desactivapeli(@PathVariable ("pelicula-id")int peliculaid){
+		repository.desactivapeli(peliculaid);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }

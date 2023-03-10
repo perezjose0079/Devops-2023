@@ -32,4 +32,11 @@ public class PeliculasJDBC {
 						pelicula.getSubtitulos(),pelicula.getSinopsis(),pelicula.getProductora(),
 						pelicula.getTamano_descarga(),pelicula.getCategorias_id());
 	}
+	
+	public void desactivapeli(int peliculaid) {
+		String sql = "UPDATE peliculas SET activa = 0 WHERE id = ?";
+		conexion.update(sql, peliculaid);
+		
+	}
+	
 }
