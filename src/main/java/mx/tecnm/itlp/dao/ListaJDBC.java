@@ -15,9 +15,10 @@ public class ListaJDBC  {
 		private JdbcTemplate conexion;
 		
 		public List<Lista> consultarList() {
-			String sql= "select m.id, m.fecha, m.perfiles_usuarios_id, peliculas_id, p.titulo\r\n"
+			String sql= "select m.id, m.fecha, m.perfiles_usuarios_id,m.activo, peliculas_id, p.titulo, m.created, m.deleted\r\n"
 					+ "from mi_lista m\r\n"
-					+ "inner join peliculas p on p.id = m.peliculas_id";
+					+ "inner join peliculas p on p.id = m.peliculas_id\r\n"
+					+ "where perfiles_usuarios_id = ? and activo='1'";
 			return conexion.query(sql, new ListaRM());
 		}
 		public void insertpeli (Lista lista) {
