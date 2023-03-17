@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.tecnm.itlp.dao.ListaJDBC;
 import mx.tecnm.itlp.models.Lista;
+import mx.tecnm.itlp.models.Peliculas;
 @RestController
 @RequestMapping("/api/lista")
 public class ListaREST {
@@ -27,7 +29,14 @@ public class ListaREST {
 		List<Lista> resultado = repository.consultarList();			
 		return new ResponseEntity<List<Lista>>(resultado, HttpStatus.OK);
 		}
-		
+	    @GetMapping("/{perfiles_usuarios}")
+public int consultartodo (@PathVariable ("perfiles_usuarios")int perfiles_usuarios_id) {
+	    	try {
+				return repository.consultartodo(perfiles_usuarios_id);
+			} catch (Exception e) {
+				return 0;
+			}
+	    }
 		@PostMapping
 	    public ResponseEntity<?> insertList(@RequestBody Lista lista){
 	    	try {

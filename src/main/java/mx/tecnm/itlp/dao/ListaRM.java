@@ -12,9 +12,8 @@ public class ListaRM implements RowMapper <Lista> {
 		Lista lista = new Lista();
 		lista.setId(rs.getInt("id"));
 		lista.setFecha(rs.getString("fecha"));
-		lista.setPerfiles_usuarios_id(rs.getString("perfiles_usuarios_id"));
+		lista.setPerfiles_usuarios_id(rs.getInt("perfiles_usuarios_id"));
 		lista.setPeliculas_id(rs.getString("peliculas_id"));
-		lista.setTitulo(rs.getString("titulo"));
 
 		return lista;
 	}

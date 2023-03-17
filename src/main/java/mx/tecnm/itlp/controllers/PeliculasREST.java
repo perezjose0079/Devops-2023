@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+
 import mx.tecnm.itlp.dao.PeliculasJDBC;
 import mx.tecnm.itlp.models.Peliculas;
 import mx.tecnm.itlp.models.Planes;
 @RestController
-@RequestMapping("/api/peliculas")
+@RequestMapping("/peliculas")
 public class PeliculasREST {
 	@Autowired
 	PeliculasJDBC repository;
@@ -29,6 +31,15 @@ public class PeliculasREST {
 	return new ResponseEntity<List<Peliculas>>(resultado, HttpStatus.OK);
 	}
 	
+    @GetMapping("/cantidad")
+    public ResponseEntity<?> pelicula(@PathVariable("id") int id){
+    	try {
+			List<Peliculas> respuesta = repository.buscartotal(id);
+			return new ResponseEntity<List<Peliculas>>(respuesta,HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+    }
 	@PostMapping
     public ResponseEntity<?> insertpeli(@RequestBody Peliculas pelicula){
     	try {

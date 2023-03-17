@@ -9,17 +9,20 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import mx.tecnm.itlp.models.Lista;
+import mx.tecnm.itlp.models.Peliculas;
+import mx.tecnm.itlp.models.Planes;
 @Repository
 public class ListaJDBC  {
 		@Autowired
 		private JdbcTemplate conexion;
 		
 		public List<Lista> consultarList() {
-			String sql= "select m.id, m.fecha, m.perfiles_usuarios_id,m.activo, peliculas_id, p.titulo, m.created, m.deleted\r\n"
-					+ "from mi_lista m\r\n"
-					+ "inner join peliculas p on p.id = m.peliculas_id\r\n"
-					+ "where perfiles_usuarios_id = ? and activo='1'";
+			String sql= "select  count(*) from mi_lista";
 			return conexion.query(sql, new ListaRM());
+		}
+		public int consultartodo(int perfiles_usuarios_id){
+			String sql = "select  count(*) from mi_lista where perfiles_usuarios_id=?";
+			return conexion.queryForObject(sql, Integer.class, perfiles_usuarios_id);
 		}
 		public void insertpeli (Lista lista) {
 			

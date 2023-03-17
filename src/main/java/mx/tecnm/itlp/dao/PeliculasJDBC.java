@@ -17,9 +17,18 @@ public class PeliculasJDBC {
 	private JdbcTemplate conexion;
 	
 	public List<Peliculas> consultarpeli() {
-		String sql= "SELECT * FROM peliculas";
+		String sql= "select *from peliculas";
 		return conexion.query(sql, new PeliculasRM());
 	}
+	
+    public List<Peliculas> buscartotal(int id){
+    	String sql = "select p.titulo, count(p.id)"
+    			+ "from peliculas p"
+    			+ "inner join mi_lista m on m.peliculas_id = p.id"
+    			+ "where p.id = ?"
+    			+ "group by p.id";
+    	return conexion.query(sql, new PeliculasRM(),id);
+    }
 	public void insertpeli (Peliculas pelicula) {
 		
 		String sql = "INSERT INTO peliculas"
